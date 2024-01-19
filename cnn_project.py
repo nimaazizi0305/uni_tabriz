@@ -43,3 +43,16 @@ model.add(layers.Flatten())
 model.add(layers.Dense(128, activation='relu'))
 model.add(layers.Dense(num_classes, activation='softmax'))
 
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+
+model.fit(train_generator, epochs=10, validation_data=validation_generator)
+
+model.save('traffic_signs_model.h5')
+
+history = model.fit(train_generator, epochs=10, validation_data=validation_generator)
+
+training_accuracy = history.history['accuracy']
+validation_accuracy = history.history['val_accuracy']
